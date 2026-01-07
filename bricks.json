@@ -1,9 +1,0 @@
-{
-    "name": "bluebricks_eks",
-    "description": "Generated using Bricks CLI",
-    "version": "1.0.0+45879cb7",
-    "native": {
-        "type": "opentofu",
-        "path": "."
-    }
-}

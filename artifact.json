@@ -37,7 +37,7 @@
     "instance_types": {
       "type": "array",
       "default": [
-        "t3.nano"
+        "t3.small"
       ],
       "description": "List of instance types"
     },

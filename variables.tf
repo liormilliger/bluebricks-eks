@@ -31,7 +31,7 @@ variable "capacity_type" {
 variable "instance_types" {
   description = "List of instance types"
   type        = list(string)
-  default     = ["t3.nano"]
+  default     = ["t3.small"]
 }
 
 variable "max_size" {
