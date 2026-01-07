@@ -2,11 +2,6 @@
 # PROVIDERS & BACKEND
 ################################################################################
 terraform {
-  backend "s3" {
-    bucket = "liorm-bluebricks"
-    key    = "eks-bluebricks/terraform.tfstate"
-    region = "us-east-2"
-  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
