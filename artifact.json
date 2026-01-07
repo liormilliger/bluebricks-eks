@@ -1,0 +1,68 @@
+{
+  "name": "eks-bluebricks-module",
+  "description": "EKS Cluster module with self-managed node group and addons",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "state": "managed",
+  "native": {
+    "type": "terraform",
+    "path": "."
+  },
+  "props": {
+    "REGION": {
+      "type": "string",
+      "default": "us-east-2",
+      "description": "AWS region"
+    },
+    "cluster_name": {
+      "type": "string",
+      "default": "liorm-bluebricks-cluster",
+      "description": "Name of the EKS cluster"
+    },
+    "cluster_version": {
+      "type": "string",
+      "default": "1.33",
+      "description": "Kubernetes version"
+    },
+    "node_group_name": {
+      "type": "string",
+      "default": "main-node-group",
+      "description": "Name of the EKS node group"
+    },
+    "capacity_type": {
+      "type": "string",
+      "default": "SPOT",
+      "description": "ON_DEMAND or SPOT"
+    },
+    "instance_types": {
+      "type": "array",
+      "default": [
+        "t3.nano"
+      ],
+      "description": "List of instance types"
+    },
+    "max_size": {
+      "type": "number",
+      "default": 2,
+      "description": "Maximum size of the node group"
+    },
+    "desired_size": {
+      "type": "number",
+      "default": 1,
+      "description": "Desired size of the node group"
+    },
+    "node_name": {
+      "type": "string",
+      "default": "liorm-node",
+      "description": "Name tag for the worker nodes"
+    },
+    "ACCOUNT": {
+      "type": "string",
+      "description": "AWS account ID (Required for Secrets Manager lookup)"
+    },
+    "SECRET": {
+      "type": "string",
+      "description": "Name of the AWS credentials secret (Required)"
+    }
+  }
+}
