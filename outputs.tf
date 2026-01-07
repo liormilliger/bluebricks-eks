@@ -22,3 +22,29 @@ output "oidc_provider_url" {
   description = "The URL of the OIDC provider"
   value       = aws_iam_openid_connect_provider.eks_oidc_provider.url
 }
+
+# -----------------------------------------------------------------------------
+# Security Groups (CRITICAL for connecting to DBs/Caches)
+# -----------------------------------------------------------------------------
+output "node_security_group_id" {
+  description = "Security Group ID of the worker nodes. Use this to allow access to RDS/ElastiCache."
+  value       = aws_security_group.eks_node_sg.id
+}
+
+output "cluster_security_group_id" {
+  description = "Security Group ID of the EKS Control Plane."
+  value       = aws_eks_cluster.eks-cluster.vpc_config[0].cluster_security_group_id
+}
+
+# -----------------------------------------------------------------------------
+# Cluster Identifiers
+# -----------------------------------------------------------------------------
+output "cluster_arn" {
+  description = "The Amazon Resource Name (ARN) of the EKS Cluster."
+  value       = aws_eks_cluster.eks-cluster.arn
+}
+
+output "cluster_id" {
+  description = "The ID of the EKS Cluster."
+  value       = aws_eks_cluster.eks-cluster.id
+}
