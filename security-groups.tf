@@ -18,13 +18,6 @@ resource "aws_security_group" "eks_node_sg" {
   }
 
   ingress {
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
-    security_groups = [aws_eks_cluster.eks-cluster.vpc_config[0].cluster_security_group_id]
-  }
-
-  ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -41,4 +34,19 @@ resource "aws_security_group" "eks_node_sg" {
   tags = {
     Name = "${var.cluster_name}-node-sg"
   }
+}
+
+# -----------------------------------------------------------------------------
+# BREAK THE CYCLE: Standalone Rule
+# -----------------------------------------------------------------------------
+resource "aws_security_group_rule" "ingress_from_cluster" {
+  description              = "Allow traffic from EKS control plane to worker nodes"
+  type                     = "ingress"
+  from_port                = 0
+  to_port                  = 0
+  protocol                 = "-1"
+  security_group_id        = aws_security_group.eks_node_sg.id
+  source_security_group_id = aws_eks_cluster.eks-cluster.vpc_config[0].cluster_security_group_id
+  
+  depends_on = [ aws_eks_cluster.eks-cluster ]
 }
